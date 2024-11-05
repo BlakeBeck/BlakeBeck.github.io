@@ -120,6 +120,8 @@ button {
     -webkit-tap-highlight-color: transparent; /* Remove tap highlight color */
     user-select: none; /* Prevent text selection */
     touch-action: manipulation; /* Disable default touch actions */
+    user-select: none; /* Prevents text selection on the button */
+    touch-action: manipulation;
 }
 
 .delivery-options button:hover {
@@ -129,8 +131,7 @@ button {
 .delivery-options button:focus,
 .delivery-options button:active {
     outline: none; /* Remove the blue outline */
-    background-color: transparent; /* Transparent background when focused */
-    color: #007BFF; /* Change text color */
+    box-shadow: none;
 }
 
 /* Form Submit Button */
