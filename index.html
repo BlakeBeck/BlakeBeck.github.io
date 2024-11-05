@@ -5,112 +5,291 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Loader</title>
     <style>
-        /* General Reset */
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
 
-        /* Button Styles */
-        .button-container {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-            justify-content: center;
-        }
+h1 {
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 2rem;
+}
 
-        .button-container button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-        }
+/* Button Styles */
+.button-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
 
-        .button-container img {
-            width: 100px;
-            height: 100px;
-        }
+.button-container button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
 
-        /* Form Container */
-        #form-container {
-            display: none; /* Hidden by default */
-            width: 100%;
-            max-width: 600px;
-            height: 500px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-        }
+.button-container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.button-container img:hover {
+    transform: scale(1.1);
+}
+
+/* Form Container */
+#form-container {
+    display: none; /* Hidden by default */
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+}
+
+/* Form Fields Styling */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-container label {
+    font-size: 18px;
+    color: #333;
+}
+
+.form-container input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+    width: 80%; /* Center the input field */
+    margin: 0 auto; /* Center horizontally */
+}
+
+.form-container input[type="text"]:focus {
+    border-color: #007BFF;
+}
+
+/* Delivery Form Button Styling */
+.delivery-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.delivery-options button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 200px;
+    margin: 10px;
+}
+
+.delivery-options button:hover {
+    background-color: #0056b3;
+}
+
+.delivery-options button:focus {
+    outline: none; /* Remove the default outline */
+    background-color: #007BFF; /* Keep the original background color */
+    color: white; /* Ensure text remains visible */
+}
+
+/* Form Submit Button */
+.form-container button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+    background-color: #218838;
+}
+
+/* Form Footer */
+.form-container .form-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-container .form-footer a {
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 14px;
+}
+
+.form-container .form-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    body {
+        padding: 20px;
+    }
+
+    .button-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .form-container {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .form-container input[type="text"] {
+        font-size: 14px;
+    }
+
+    .form-container button {
+        font-size: 16px;
+    }
+}
+
     </style>
 </head>
 <body>
 
-    <h1>Dynamic Form Loader</h1>
+    <h1>S&C</h1>
 
     <!-- Button Section -->
     <div class="button-container">
         <button onclick="loadForm('visitor')">
             <img src="https://i.postimg.cc/tgXqQ80n/105428-visitor-512.webp" alt="Visitor">
-            <div>Visitor</div>
         </button>
         <button onclick="loadForm('interview')">
             <img src="https://i.postimg.cc/MZsdyBZC/clipart1820245.png" alt="Interview">
-            <div>Interview</div>
         </button>
         <button onclick="loadForm('delivery')">
             <img src="https://i.postimg.cc/Yq50VXqQ/package-8856091-640.png" alt="Delivery">
-            <div>Delivery</div>
         </button>
     </div>
 
     <!-- Form Display Area -->
     <div id="form-container">
-        <iframe id="form-frame" src="" width="100%" height="100%" frameborder="0"></iframe>
+        <!-- Visitor Form -->
+        <div class="form-container" id="visitor-form" style="display:none;">
+            <form onsubmit="handleVisitorSubmit(event)">
+                <div>
+                    <label for="visitor-name">Name:</label>
+                    <input type="text" id="visitor-name" name="name" required>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Interview Form -->
+        <div class="form-container" id="interview-form" style="display:none;">
+            <form onsubmit="handleInterviewSubmit(event)">
+                <div>
+                    <label for="interview-name">Name:</label>
+                    <input type="text" id="interview-name" name="name" required>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Delivery Form -->
+        <div class="form-container" id="delivery-form" style="display:none;">
+            <form id="delivery-form" onsubmit="handleDeliverySubmit(event)">
+                <div class="delivery-options">
+                    <button type="button" onclick="selectDeliveryOption('Confirm Delivery')">Confirm Delivery</button>
+                    <button type="button" onclick="selectDeliveryOption('Signature Required')">Signature Required</button>
+                </div>
+                <input type="hidden" id="delivery-option" name="deliveryOption">
+            </form>
+        </div>
     </div>
 
     <script>
+        // This function handles the display of the selected form based on button clicked
         function loadForm(type) {
-            const iframe = document.getElementById('form-frame');
-            const formContainer = document.getElementById('form-container');
-            let formUrl = '';
+            // Hide all forms
+            document.getElementById('visitor-form').style.display = 'none';
+            document.getElementById('interview-form').style.display = 'none';
+            document.getElementById('delivery-form').style.display = 'none';
 
-            // Choose the correct form based on button click
-            switch(type) {
-                case 'visitor':
-                    formUrl = 'https://creatorapp.zohopublic.com/zoho_salsbury/front-desk-kiosk/form-embed/Visitor_Check_In_Form/da5Wzmx9zVFhr5zAjJHHuSXuKg8BTqK20nRu2wur1RJYD7tDm9Um917bHthwZJhkMqwMqv2dmM87A0Yns11zGbYe40ePjRnHSHgO';
-                    break;
-                case 'interview':
-                    formUrl = 'https://creatorapp.zohopublic.com/zoho_salsbury/front-desk-kiosk/form-embed/Interview_Check_In_Form/ShuCsh4GR7eOYq15kVrC51NpuP3Q2KKrKwxavVdXOxhrEfAe0afsO71bRp8TwkJ6tuVwW8szUkKT5UZwk5nMPPp7zabpPaykeKw9';
-                    break;
-                case 'delivery':
-                    formUrl = 'https://creatorapp.zohopublic.com/zoho_salsbury/front-desk-kiosk/form-perma/Delivery_Check_In_Form/mdWBKpdXt7g8yx4m1dDErjqskn2MAR1szWny6qNqYFd8RbQj9YatVpOf857jWjHfHFGzEa1v17Zm01QOfAaQ6ZFQRp2y6WedM82T';
-                    break;
-                default:
-                    formUrl = '';
+            // Show the selected form
+            if (type === 'visitor') {
+                document.getElementById('visitor-form').style.display = 'block';
+            } else if (type === 'interview') {
+                document.getElementById('interview-form').style.display = 'block';
+            } else if (type === 'delivery') {
+                document.getElementById('delivery-form').style.display = 'block';
             }
 
-            // Show the form container and load the selected form
-            formContainer.style.display = 'block';
-            iframe.src = formUrl;
+            // Make the form container visible
+            document.getElementById('form-container').style.display = 'block';
         }
 
-        // Listen for form submission inside iframe
-        window.addEventListener('message', (event) => {
-            if (event.data === 'formSubmitted') {
-                document.getElementById('form-container').style.display = 'none';
-                document.getElementById('form-frame').src = ''; // Clear iframe source
-            }
-        });
+        // Handle Visitor form submission
+        function handleVisitorSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('visitor-name').value;
+            document.getElementById('form-container').style.display = 'none';
+            location.reload();
+        }
+
+        // Handle Interview form submission
+        function handleInterviewSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('interview-name').value;
+            document.getElementById('form-container').style.display = 'none';
+            location.reload();
+        }
+
+        // Handle Delivery form submission
+        function handleDeliverySubmit(event) {
+            event.preventDefault();
+            const deliveryOption = document.getElementById('delivery-option').value;
+            document.getElementById('form-container').style.display = 'none';
+            location.reload();
+        }
+
+        // Select Delivery option
+        function selectDeliveryOption(option) {
+            document.getElementById('delivery-option').value = option;
+            const buttons = document.querySelectorAll('.delivery-options button');
+            buttons.forEach(button => {
+                button.style.backgroundColor = '#007BFF'; // Reset button background
+            });
+            event.target.style.backgroundColor = '#0056b3'; // Highlight selected button
+            
+            // Submit the form when an option is selected
+            handleDeliverySubmit(new Event('submit'));
+        }
     </script>
 </body>
 </html>
