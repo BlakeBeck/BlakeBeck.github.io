@@ -26,6 +26,14 @@ h1 {
     font-size: 2rem;
 }
 
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: inherit; /* Inherit text color */
+}
+
 /* Button Styles */
 .button-container {
     display: flex;
@@ -99,6 +107,7 @@ h1 {
 }
 
 .delivery-options button {
+    -webkit-tap-highlight-color: transparent;
     background-color: #007BFF; /* Normal background color */
     color: white;
     border: none;
@@ -116,14 +125,14 @@ h1 {
 }
 
 .delivery-options button:focus {
-    outline: none; /* Remove default focus outline */
-    background-color: transparent; /* Set background to transparent on focus */
-    color: #007BFF; /* Change text color to maintain visibility */
+    outline: none; /* Remove default outline */
+    background-color: transparent; /* Set background to transparent */
+    color: #007BFF; /* Text color on focus */
 }
 
 .delivery-options button:active {
-    background-color: transparent; /* Set background to transparent on active */
-    color: #0056b3; /* Optional: Change text color on click */
+    background-color: transparent; /* Ensure no background on active */
+    color: #0056b3; /* Optional: change text color on click */
 }
 
 /* Form Submit Button */
