@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Loader</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        /* Button Styles */
+        .button-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .button-container button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .button-container img {
+            width: 100px;
+            height: 100px;
+        }
+
+        /* Form Container */
+        #form-container {
+            display: none; /* Hidden by default */
+            width: 100%;
+            max-width: 600px;
+            height: 500px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dynamic Form Loader</h1>
+
+    <!-- Button Section -->
+    <div class="button-container">
+        <button onclick="loadForm('visitor')">
+            <img src="https://i.postimg.cc/tgXqQ80n/105428-visitor-512.webp" alt="Visitor">
+            <div>Visitor</div>
+        </button>
+        <button onclick="loadForm('interview')">
+            <img src="https://i.postimg.cc/MZsdyBZC/clipart1820245.png" alt="Interview">
+            <div>Interview</div>
+        </button>
+        <button onclick="loadForm('delivery')">
+            <img src="https://i.postimg.cc/Yq50VXqQ/package-8856091-640.png" alt="Delivery">
+            <div>Delivery</div>
+        </button>
+    </div>
+
+    <!-- Form Display Area -->
+    <div id="form-container">
+        <iframe id="form-frame" src="" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        function loadForm(type) {
+            const iframe = document.getElementById('form-frame');
+            const formContainer = document.getElementById('form-container');
+            let formUrl = '';
+
+            // Choose the correct form based on button click
+            switch(type) {
+                case 'visitor':
+                    formUrl = 'https://creatorapp.zohopublic.com/zoho_salsbury/front-desk-kiosk/form-embed/Visitor_Check_In_Form/da5Wzmx9zVFhr5zAjJHHuSXuKg8BTqK20nRu2wur1RJYD7tDm9Um917bHthwZJhkMqwMqv2dmM87A0Yns11zGbYe40ePjRnHSHgO';
+                    break;
+                case 'interview':
+                    formUrl = 'https://creatorapp.zohopublic.com/zoho_salsbury/front-desk-kiosk/form-embed/Interview_Check_In_Form/ShuCsh4GR7eOYq15kVrC51NpuP3Q2KKrKwxavVdXOxhrEfAe0afsO71bRp8TwkJ6tuVwW8szUkKT5UZwk5nMPPp7zabpPaykeKw9';
+                    break;
+                case 'delivery':
+                    formUrl = 'https://creatorapp.zohopublic.com/zoho_salsbury/front-desk-kiosk/form-perma/Delivery_Check_In_Form/mdWBKpdXt7g8yx4m1dDErjqskn2MAR1szWny6qNqYFd8RbQj9YatVpOf857jWjHfHFGzEa1v17Zm01QOfAaQ6ZFQRp2y6WedM82T';
+                    break;
+                default:
+                    formUrl = '';
+            }
+
+            // Show the form container and load the selected form
+            formContainer.style.display = 'block';
+            iframe.src = formUrl;
+        }
+
+        // Listen for form submission inside iframe
+        window.addEventListener('message', (event) => {
+            if (event.data === 'formSubmitted') {
+                document.getElementById('form-container').style.display = 'none';
+                document.getElementById('form-frame').src = ''; // Clear iframe source
+            }
+        });
+    </script>
+</body>
+</html>
