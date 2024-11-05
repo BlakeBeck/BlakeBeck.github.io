@@ -306,6 +306,12 @@ button {
             // Submit the form when an option is selected
             handleDeliverySubmit(new Event('submit'));
         }
+
+        document.querySelectorAll('.delivery-options button').forEach(button => {
+        button.addEventListener('touchstart', function(e) {
+            e.preventDefault(); // Prevent default touch action
+            });
+        });
     </script>
 </body>
 </html>
