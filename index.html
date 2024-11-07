@@ -89,9 +89,70 @@ button {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     border: 1px solid #ddd;
     margin-top: 20px;
+    align-items: center;
 }
 
+/* Adjust the layout for visitor and interview forms */
+#visitor-form form,
+#interview-form form {
+    display: flex;
+    flex-direction: row;  /* Align form elements in a row */
+    align-items: center;  /* Vertically center the items */
+    justify-content: center; /* Align items in the center horizontally */
+    gap: 10px;  /* Adds space between the elements */
+    width: 100%;
+}
+
+#visitor-form div,
+#interview-form div {
+    display: flex;
+    flex-direction: row; /* Align label and input side by side */
+    align-items: center; /* Vertically center the items */
+    gap: 10px;  /* Space between label and input */
+    width: 100%;
+}
+
+/* Adjust Label and Input for Row Layout */
+#visitor-form label,
+#interview-form label {
+    font-size: 18px;
+    color: #333;
+    margin-left: 10%;
+    text-align: right; /* Align label to the right of the input */
+}
+
+#visitor-form input[type="text"],
+#interview-form input[type="text"] {
+    width: 100%; /* Set the input field width to fit in the row */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Submit Button Styling */
+#visitor-form button,
+#interview-form button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-right: 10%;
+}
+
+
 /* Form Fields Styling */
+#form-title {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+
 .form-container {
     display: flex;
     flex-direction: column;
@@ -109,7 +170,7 @@ button {
     border: 1px solid #ccc;
     font-size: 16px;
     outline: none;
-    width: 80%; /* Center the input field */
+    width: 60%; /* Center the input field */
     margin: 0 auto; /* Center horizontally */
 }
 
@@ -239,6 +300,7 @@ button {
 
     <!-- Form Display Area -->
     <div id="form-container">
+        <h2 id="form-title"></h2>
         <!-- Visitor Form -->
         <div class="form-container" id="visitor-form" style="display:none;">
             <form onsubmit="handleVisitorSubmit(event)">
@@ -282,11 +344,15 @@ button {
             document.getElementById('delivery-form').style.display = 'none';
 
             // Show the selected form
+            const formTitle = document.getElementById('form-title');
             if (type === 'visitor') {
+                formTitle.textContent = 'Visitor';
                 document.getElementById('visitor-form').style.display = 'block';
             } else if (type === 'interview') {
+                formTitle.textContent = 'Interview';
                 document.getElementById('interview-form').style.display = 'block';
             } else if (type === 'delivery') {
+                formTitle.textContent = 'Delivery';
                 document.getElementById('delivery-form').style.display = 'block';
             }
 
