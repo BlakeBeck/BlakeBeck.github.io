@@ -376,29 +376,63 @@ button {
         }
 
         // Handle Visitor form submission
-        function handleVisitorSubmit(event) {
+        async function handleVisitorSubmit(event) {
             event.preventDefault();
-            const name = document.getElementById('visitor-name').value;
-            const destination = "visitor";
+            const vName = document.getElementById('visitor-name').value;
+            const formData = {
+                type: "visitor",
+                name: vName 
+            };
+            await sendToLambda(formData);
             document.getElementById('form-container').style.display = 'none';
             location.reload();
         }
 
         // Handle Interview form submission
-        function handleInterviewSubmit(event) {
+        async function handleInterviewSubmit(event) {
             event.preventDefault();
-            const name = document.getElementById('interview-name').value;
-            const destination = "interview";
+            const iName = document.getElementById('interview-name').value;
+            const formData = {
+                type: "interview",
+                name: iName
+            };
+            await sendToLambda(formData);
             document.getElementById('form-container').style.display = 'none';
             location.reload();
         }
 
-        function handleDeliverySubmit(event) {
+        async function handleDeliverySubmit(event) {
             event.preventDefault();
-            const deliveryOption = document.getElementsByName('deliveryOption').value;
-            const destination = "delivery";
+            const dOption = event.submitter.value;
+            const formData = {
+                type: "delivery",
+                deliveryOption: dOption
+            };
+            await sendToLambda(formData);
             document.getElementById('form-container').style.display = 'none';
-            //location.reload();
+            location.reload();
+        }
+
+        async function sendToLambda(data) {
+            const webhookUrl = "https://sx758gvnr7.execute-api.us-east-2.amazonaws.com/dev_stage_cors/my_kiosk_api";
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    console.log("Success!")
+                } else {
+                    console.error("Failed.")
+                }
+                
+            } catch (error) {
+                console.error("Error: ", error.message)
+            }
         }
 
         document.querySelectorAll('.delivery-options button').forEach(button => {
