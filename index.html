@@ -226,7 +226,6 @@ button {
     outline: none; /* Remove the blue outline */
     box-shadow: none;
     border: none;
-    pointer-events: none;
 }
 
 /* Form Submit Button */
@@ -340,14 +339,15 @@ button {
 
         <!-- Delivery Form -->
         <div class="form-container" id="delivery-form" style="display:none;">
-            <form id="delivery-form" onsubmit="handleDeliverySubmit(event)">
+            <form onsubmit="handleDeliverySubmit(event)">
                 <div class="delivery-options">
-                    <button type="button" onclick="selectDeliveryOption('Confirm Delivery')">Confirm Delivery</button>
-                    <button type="button" onclick="selectDeliveryOption('Signature Required')">Signature Required</button>
+                    <button type="submit" name="deliveryOption" value="Confirm Delivery">Confirm Delivery</button>
+                    <button type="submit" name="deliveryOption" value="Signature Required">Signature Required</button>
                 </div>
-                <input type="hidden" id="delivery-option" name="deliveryOption">
             </form>
         </div>
+
+
     </div>
 
     <script>
@@ -379,6 +379,7 @@ button {
         function handleVisitorSubmit(event) {
             event.preventDefault();
             const name = document.getElementById('visitor-name').value;
+            const destination = "visitor";
             document.getElementById('form-container').style.display = 'none';
             location.reload();
         }
@@ -387,29 +388,17 @@ button {
         function handleInterviewSubmit(event) {
             event.preventDefault();
             const name = document.getElementById('interview-name').value;
+            const destination = "interview";
             document.getElementById('form-container').style.display = 'none';
             location.reload();
         }
 
-        // Handle Delivery form submission
         function handleDeliverySubmit(event) {
             event.preventDefault();
-            const deliveryOption = document.getElementById('delivery-option').value;
+            const deliveryOption = document.getElementsByName('deliveryOption').value;
+            const destination = "delivery";
             document.getElementById('form-container').style.display = 'none';
-            location.reload();
-        }
-
-        // Select Delivery option
-        function selectDeliveryOption(option) {
-            document.getElementById('delivery-option').value = option;
-            const buttons = document.querySelectorAll('.delivery-options button');
-            buttons.forEach(button => {
-                button.style.backgroundColor = '#007BFF'; // Reset button background
-            });
-            event.target.style.backgroundColor = '#0056b3'; // Highlight selected button
-            
-            // Submit the form when an option is selected
-            handleDeliverySubmit(new Event('submit'));
+            //location.reload();
         }
 
         document.querySelectorAll('.delivery-options button').forEach(button => {
@@ -417,6 +406,7 @@ button {
             e.preventDefault(); // Prevent default touch action
             });
         });
+
     </script>
 </body>
 </html>
