@@ -259,14 +259,14 @@ button {
 }
 
 #welcome-message {
-    font-size: 28px;
-    margin-top: 50px;
+    font-size: 36px;
+    margin-top: 60px;
     text-align: center;
     color: #0c0c0c;
 }
 
 #thank-you-message {
-    font-size: 28px;
+    font-size: 36px;
     margin-top: 40px;
     text-align: center;
     color: #0c0c0c;
@@ -367,6 +367,8 @@ button {
     <script>
         // This function handles the display of the selected form based on button clicked
 
+        let formTimeout;
+
         document.addEventListener('DOMContentLoaded', () => {
         // Show only the thank-you message by default
             document.getElementById('welcome-message').style.display = 'block';
@@ -377,6 +379,7 @@ button {
         });
 
         function loadForm(type) {
+            clearTimeout(formTimeout);
             // Hide all forms
             document.getElementById('welcome-message').style.display = 'none';
             document.getElementById('thank-you-message').style.display = 'none';
@@ -399,6 +402,16 @@ button {
 
             // Make the form container visible
             document.getElementById('form-container').style.display = 'block';
+
+            formTimeout = setTimeout(function() {
+                resetForm();
+            }, 300000);
+        }
+
+        function resetForm() {
+            document.getElementById('form-container').style.display = 'none';
+            document.getElementById('welcome-message').style.display = 'block';
+            document.getElementById('thank-you-message').style.display = 'none';
         }
 
         // Handle Visitor form submission
@@ -469,6 +482,18 @@ button {
                 console.error("Error: ", error.message)
             }
         }
+
+        document.addEventListener('click', function(event) {
+            const formContainer = document.getElementById('form-container');
+            const buttonContainer = document.querySelector('.button-container');
+            
+            // Check if the click was outside the form container and the button container
+            if (!formContainer.contains(event.target) && !buttonContainer.contains(event.target)) {
+                document.getElementById('form-container').style.display = 'none';
+                document.getElementById('welcome-message').style.display = 'block';
+                document.getElementById('thank-you-message').style.display = 'none';
+            }
+        });
 
         document.querySelectorAll('.delivery-options button').forEach(button => {
         button.addEventListener('touchstart', function(e) {
