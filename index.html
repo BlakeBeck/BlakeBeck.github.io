@@ -258,10 +258,18 @@ button {
     text-decoration: underline;
 }
 
+#welcome-message {
+    font-size: 28px;
+    margin-top: 50px;
+    text-align: center;
+    color: #0c0c0c;
+}
+
 #thank-you-message {
-    font-size: 24px;
+    font-size: 28px;
     margin-top: 40px;
     text-align: center;
+    color: #0c0c0c;
 }
 
 /* Mobile Responsiveness */
@@ -315,6 +323,7 @@ button {
         </button>
     </div>
     
+    <p id="welcome-message" style="display: block;">Welcome! What brings you to S&C?</p>
     <p id="thank-you-message" style="display: block;">Thank you for your submission!<br>Someone will be with you shortly.</p>
 
     <!-- Form Display Area -->
@@ -360,6 +369,7 @@ button {
 
         document.addEventListener('DOMContentLoaded', () => {
         // Show only the thank-you message by default
+            document.getElementById('welcome-message').style.display = 'block';
             document.getElementById('thank-you-message').style.display = 'none';
             document.getElementById('visitor-form').style.display = 'none';
             document.getElementById('interview-form').style.display = 'none';
@@ -368,6 +378,7 @@ button {
 
         function loadForm(type) {
             // Hide all forms
+            document.getElementById('welcome-message').style.display = 'none';
             document.getElementById('thank-you-message').style.display = 'none';
             document.getElementById('visitor-form').style.display = 'none';
             document.getElementById('interview-form').style.display = 'none';
