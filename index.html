@@ -18,12 +18,15 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f5f5;
+    background: linear-gradient(135deg, #D4AF37, #808080);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0px;
+    padding: 0;
+    height: 100vh;
+    margin: 0;
 }
+
 
 h1 {
     margin-bottom: 30px;
@@ -82,12 +85,9 @@ button {
 .button-text {
     font-size: 24px;
     font-weight: bold;
-    color: #333;
+    color: #0c0c0c;
     margin-top: 20px; /* Adds space between the image and the text */
 }
-
-
-
 
 /* Form Container */
 #form-container {
@@ -258,6 +258,12 @@ button {
     text-decoration: underline;
 }
 
+#thank-you-message {
+    font-size: 24px;
+    margin-top: 40px;
+    text-align: center;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 600px) {
     body {
@@ -309,6 +315,7 @@ button {
         </button>
     </div>
     
+    <p id="thank-you-message" style="display: block;">Thank you for your submission!<br>Someone will be with you shortly.</p>
 
     <!-- Form Display Area -->
     <div id="form-container">
@@ -350,8 +357,18 @@ button {
 
     <script>
         // This function handles the display of the selected form based on button clicked
+
+        document.addEventListener('DOMContentLoaded', () => {
+        // Show only the thank-you message by default
+            document.getElementById('thank-you-message').style.display = 'none';
+            document.getElementById('visitor-form').style.display = 'none';
+            document.getElementById('interview-form').style.display = 'none';
+            document.getElementById('delivery-form').style.display = 'none';
+        });
+
         function loadForm(type) {
             // Hide all forms
+            document.getElementById('thank-you-message').style.display = 'none';
             document.getElementById('visitor-form').style.display = 'none';
             document.getElementById('interview-form').style.display = 'none';
             document.getElementById('delivery-form').style.display = 'none';
@@ -383,7 +400,10 @@ button {
             };
             await sendToLambda(formData);
             document.getElementById('form-container').style.display = 'none';
-            location.reload();
+            document.getElementById('thank-you-message').style.display = 'block';
+            setTimeout(function() {
+                location.reload();
+            }, 10000);
         }
 
         // Handle Interview form submission
@@ -396,7 +416,10 @@ button {
             };
             await sendToLambda(formData);
             document.getElementById('form-container').style.display = 'none';
-            location.reload();
+            document.getElementById('thank-you-message').style.display = 'block';
+            setTimeout(function() {
+                location.reload();
+            }, 10000);
         }
 
         async function handleDeliverySubmit(event) {
@@ -408,7 +431,10 @@ button {
             };
             await sendToLambda(formData);
             document.getElementById('form-container').style.display = 'none';
-            location.reload();
+            document.getElementById('thank-you-message').style.display = 'block';
+            setTimeout(function() {
+                location.reload();
+            }, 10000);
         }
 
         async function sendToLambda(data) {
