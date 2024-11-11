@@ -18,7 +18,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #D4AF37, #808080);
+    background-color: rgb(230, 230, 230);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,6 +49,8 @@ button {
 .main-image img {
     display: block; /* Makes the image behave like a block element */
     margin: 0 auto; /* Centers the image horizontally */
+    width: 60%;
+    height: auto;
     transition: transform 0.3s ease; /* Optional: for smooth zoom effect on hover */
 }
 
@@ -56,7 +58,7 @@ button {
 /* Button Styles */
 .button-container {
     display: flex;
-    gap: 40px;
+    gap: 100px;
     justify-content: center;
     flex-wrap: wrap; /* Ensure wrapping on smaller screens */
 }
@@ -72,8 +74,8 @@ button {
 }
 
 .button-container img {
-    width: 150px;
-    height: 150px;
+    width: 220px;
+    height: 220px;
     border-radius: 10px;
     transition: transform 0.3s ease;
 }
@@ -360,13 +362,9 @@ button {
                 </div>
             </form>
         </div>
-
-
     </div>
 
     <script>
-        // This function handles the display of the selected form based on button clicked
-
         let formTimeout;
 
         document.addEventListener('DOMContentLoaded', () => {
